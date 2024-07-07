@@ -1,9 +1,9 @@
 let board = [
     [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 1, 2, 1, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -12,6 +12,10 @@ let board = [
 console.log(board.length)
 
 console.log(amelia_move(board, 3, 3))
+
+function pawn_move(board, y, x) {
+
+}
 
 function king_move(board, y, x) {
     let moves = []
@@ -96,8 +100,8 @@ function rook_move(board, y, x) {
 function bishop_move(board, y, x) {
     let moves = []
 
-    let i = y + 1;
-    let j = x + 1;
+    let i = y + 1
+    let j = x + 1
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
@@ -109,8 +113,8 @@ function bishop_move(board, y, x) {
         j += 1
     }
 
-    i = y - 1;
-    j = x - 1;
+    i = y - 1
+    j = x - 1
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
@@ -122,8 +126,8 @@ function bishop_move(board, y, x) {
         j -= 1
     }
 
-    i = y - 1;
-    j = x + 1;
+    i = y - 1
+    j = x + 1
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
@@ -135,8 +139,8 @@ function bishop_move(board, y, x) {
         j += 1
     }
 
-    i = y + 1;
-    j = x - 1;
+    i = y + 1
+    j = x - 1
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
@@ -183,8 +187,8 @@ function amelia_move(board, y, x) {
         moves.push([i, x])
     }
 
-    let i = y + 1;
-    let j = x + 1;
+    let i = y + 1
+    let j = x + 1
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
@@ -196,8 +200,8 @@ function amelia_move(board, y, x) {
         j += 1
     }
 
-    i = y - 1;
-    j = x - 1;
+    i = y - 1
+    j = x - 1
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
@@ -209,8 +213,8 @@ function amelia_move(board, y, x) {
         j -= 1
     }
 
-    i = y - 1;
-    j = x + 1;
+    i = y - 1
+    j = x + 1
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
@@ -222,8 +226,8 @@ function amelia_move(board, y, x) {
         j += 1
     }
 
-    i = y + 1;
-    j = x - 1;
+    i = y + 1
+    j = x - 1
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
@@ -237,3 +241,6 @@ function amelia_move(board, y, x) {
 
     return moves
 }
+
+
+
