@@ -1,9 +1,11 @@
+
+
 let board = [
     [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 1, 1, 0, 0, 0],
-    [0, 0, 1, 2, 1, 0, 0, 0],
-    [0, 0, 1, 1, 1, 0, 0, 0],
+    [0, -1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -11,10 +13,31 @@ let board = [
 
 console.log(board.length)
 
-console.log(amelia_move(board, 3, 3))
+console.log(pawn_move(board, 1, 1))
 
 function pawn_move(board, y, x) {
+    let moves = []
 
+    if (board[y][x] > 0) {
+        if (y == 6) {
+            moves.push([y - 1, x])
+            moves.push([y - 2, x])
+            return moves
+        }
+
+        moves.push([y - 1, x])
+        return moves
+    } else {
+        if (y == 1) {
+            moves.push([y + 1, x])
+            moves.push([y + 2, x])
+            return moves
+        }
+
+        moves.push([y + 1, x])
+        return moves
+
+    }
 }
 
 function king_move(board, y, x) {
@@ -241,6 +264,3 @@ function amelia_move(board, y, x) {
 
     return moves
 }
-
-
-
