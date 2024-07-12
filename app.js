@@ -1,31 +1,44 @@
 let board = [
     [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 3, 3, 3, 0, 0, 0],
-    [0, 0, 3, 2, 3, 0, 0, 0],
-    [0, 0, 3, 3, 3, 0, 0, 0],
+    [-6, -6, -6, -6, -6, -6, -6, -6],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [6, 6, 6, 6, 6, 6, 6, 6],
     [0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
-console.log(amelia_move(board, 3, 3))
+//console.log(move(board, 1, 0))
+//move(board, 3, 3)
 
 function move(board, y, x) {
     switch (board[y][x]) {
         case 0:
-            break
-        case 1, -1:
+            return []
+        case 1:
             return king_move(board, y, x)
-        case 2, -2:
+        case -1:
+            return king_move(board, y, x)
+        case 2:
             return amelia_move(board, y, x)
-        case 3, -3:
+        case -2:
+            return amelia_move(board, y, x)
+        case 3:
             return rook_move(board, y, x)
-        case 4, -4:
+        case -3:
+            return rook_move(board, y, x)
+        case 4:
             return bishop_move(board, y, x)
-        case 5, -5:
+        case -4:
+            return bishop_move(board, y, x)
+        case 5:
             return knight_move(board, y, x)
-        case 6, -6:
+        case -5:
+            return knight_move(board, y, x)
+        case 6:
+            return pawn_move(board, y, x)
+        case -6:
             return pawn_move(board, y, x)
     }
 }
@@ -359,3 +372,5 @@ function amelia_move(board, y, x) {
     }
     return moves
 }
+
+export {move}
