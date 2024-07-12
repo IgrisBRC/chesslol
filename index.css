@@ -1,13 +1,25 @@
+*{
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+}
+
 .white{
     background-color: antiquewhite;
-    height: 100px;
-    width: 100px;
+    height: 76px;
+    width: 76px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .black{
-    height: 100px;
-    width: 100px; 
-    background-color: brown;   
+    height: 76px;
+    width: 76px; 
+    background-color: brown; 
+    display: flex;
+    justify-content: center;
+    align-items: center;  
 }
 
 body{
@@ -16,11 +28,12 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 1px;
 }
 
 .chess-board{
-    width: 800px;
-    height: 800px;
+    width: 608px;
+    height: 608px;
     display: grid;
     grid-template-columns:repeat(8,1fr);
     grid-template-rows:repeat(8,1fr);

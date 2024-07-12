@@ -1,17 +1,31 @@
 
 
 let board = [
+<<<<<<< Updated upstream
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
+=======
+    [0, 1, 0, 0, 0, 0, 0, 0],
+    [1, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 1, 2, 1, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0],
+>>>>>>> Stashed changes
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
+<<<<<<< Updated upstream
 console.log(amelia_move(board, 7, 7))
+=======
+console.log(board.length)
+
+console.log(amelia_move(board, 0,0))
+>>>>>>> Stashed changes
 
 function pawn_move(board, y, x) {
     let moves = []
