@@ -1,25 +1,32 @@
 *{
-    font-size: 30px;
     margin: 0;
     padding: 0;
 }
 
-.white{
-    background-color: antiquewhite;
+.box{
     height: 76px;
-    width: 76px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 76px;  
+    position: relative; 
+}
+.top-corner{
+    padding: 1px;
+    position: absolute;
+}
+.bottom-corner{
+    padding: 1px;
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
 }
 
-.black{
-    height: 76px;
-    width: 76px; 
-    background-color: brown; 
-    display: flex;
-    justify-content: center;
-    align-items: center;  
+.white{
+    background-color: #eaead2;
+    color: #4b7299;
+}
+
+.black{    
+    background-color: #4b7299; 
+    color: #eaead2;
 }
 
 body{
