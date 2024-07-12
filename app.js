@@ -2,7 +2,7 @@
 
 let board = [
     [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, -1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -11,36 +11,46 @@ let board = [
     [0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
-console.log(board.length)
-
-console.log(pawn_move(board, 1, 1))
+console.log(amelia_move(board, 7, 7))
 
 function pawn_move(board, y, x) {
     let moves = []
+    let color = board[y][x] > 0
 
-    if (board[y][x] > 0) {
+    if (color) {
         if (y == 6) {
-            moves.push([y - 1, x])
-            moves.push([y - 2, x])
-            return moves
+            if (board[y - 1][x] == 0) {
+                moves.push([y - 1, x])
+            }
+            if (board[y - 2][x] == 0) {
+                moves.push([y - 2, x])
+            }
+        } else if (color && y != 0) {
+            if (board[y - 1][x] == 0) {
+                moves.push([y - 1, x])
+            }
         }
 
-        moves.push([y - 1, x])
         return moves
     } else {
         if (y == 1) {
-            moves.push([y + 1, x])
-            moves.push([y + 2, x])
-            return moves
+            if (board[y + 1][x] == 0) {
+                moves.push([y + 1, x])
+            }
+            if (board[y + 2][x] == 0) {
+                moves.push([y + 2, x])
+            }
+        } else if (color && y != 7) {
+            if (board[y + 1][x] == 0) {
+                moves.push([y + 1, x])
+            }
         }
-
-        moves.push([y + 1, x])
         return moves
-
     }
 }
 
 function king_move(board, y, x) {
+    let color = board[y][x] > 0
     let moves = []
 
     for (let i = y - 1; i <= y + 1; i += 1) {
@@ -48,7 +58,7 @@ function king_move(board, y, x) {
             if ((i == y && j == x) || i < 0 || j < 0 || i >= board.length || j >= board[i].length) {
                 continue
             }
-            if (board[i][j] == 0) {
+            if (board[i][j] == 0 || (color ^ board[i][j] > 0)) {
                 moves.push([i, j])
             }
         }
@@ -58,6 +68,7 @@ function king_move(board, y, x) {
 }
 
 function knight_move(board, y, x) {
+    let color = board[y][x] > 0
     let moves = []
 
     let cand = [
@@ -76,8 +87,8 @@ function knight_move(board, y, x) {
             continue
         }
 
-        if (board[i][j] == 0) {
-            moves.push([i, j])
+        if (board[cand[k][0]][cand[k][1]] == 0 || (color ^ board[cand[k][0]][cand[k][1]] > 0)) {
+            moves.push([cand[k][0], cand[k][1]])
         }
     }
 
@@ -86,10 +97,15 @@ function knight_move(board, y, x) {
 
 
 function rook_move(board, y, x) {
+    let color = board[y][x] > 0
     let moves = []
 
     for (let i = x + 1; i < board[1].length; i++) {
         if (board[y][i] != 0) {
+            if (color ^ board[y][i]) {
+                moves.push([y, i])
+                break
+            }
             break
         }
         moves.push([y, i])
@@ -97,6 +113,10 @@ function rook_move(board, y, x) {
 
     for (let i = x - 1; i >= 0; i--) {
         if (board[y][i] != 0) {
+            if (color ^ board[y][i]) {
+                moves.push([y, i])
+                break
+            }
             break
         }
         moves.push([y, i])
@@ -105,6 +125,10 @@ function rook_move(board, y, x) {
 
     for (let i = y + 1; i < board.length; i++) {
         if (board[i][x] != 0) {
+            if (color ^ board[i][x]) {
+                moves.push([i, x])
+                break
+            }
             break
         }
         moves.push([i, x])
@@ -112,6 +136,10 @@ function rook_move(board, y, x) {
 
     for (let i = y - 1; i >= 0; i--) {
         if (board[i][x] != 0) {
+            if (color ^ board[i][x]) {
+                moves.push([i, x])
+                break
+            }
             break
         }
         moves.push([i, x])
@@ -121,6 +149,7 @@ function rook_move(board, y, x) {
 }
 
 function bishop_move(board, y, x) {
+    let color = board[y][x] > 0
     let moves = []
 
     let i = y + 1
@@ -128,6 +157,10 @@ function bishop_move(board, y, x) {
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
+            if (color ^ board[i][j] > 0) {
+                moves.push([i, j])
+                break
+            }
             break
         }
 
@@ -141,6 +174,10 @@ function bishop_move(board, y, x) {
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
+            if (color ^ board[i][j] > 0) {
+                moves.push([i, j])
+                break
+            }
             break
         }
 
@@ -154,6 +191,10 @@ function bishop_move(board, y, x) {
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
+            if (color ^ board[i][j] > 0) {
+                moves.push([i, j])
+                break
+            }
             break
         }
 
@@ -167,6 +208,10 @@ function bishop_move(board, y, x) {
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
+            if (color ^ board[i][j] > 0) {
+                moves.push([i, j])
+                break
+            }
             break
         }
 
@@ -179,10 +224,15 @@ function bishop_move(board, y, x) {
 }
 
 function amelia_move(board, y, x) {
+    let color = board[y][x] > 0
     let moves = []
 
-    for (let i = x + 1; i < board[0].length; i++) {
+    for (let i = x + 1; i < board[1].length; i++) {
         if (board[y][i] != 0) {
+            if (color ^ board[y][i]) {
+                moves.push([y, i])
+                break
+            }
             break
         }
         moves.push([y, i])
@@ -190,6 +240,10 @@ function amelia_move(board, y, x) {
 
     for (let i = x - 1; i >= 0; i--) {
         if (board[y][i] != 0) {
+            if (color ^ board[y][i]) {
+                moves.push([y, i])
+                break
+            }
             break
         }
         moves.push([y, i])
@@ -198,6 +252,10 @@ function amelia_move(board, y, x) {
 
     for (let i = y + 1; i < board.length; i++) {
         if (board[i][x] != 0) {
+            if (color ^ board[i][x]) {
+                moves.push([i, x])
+                break
+            }
             break
         }
         moves.push([i, x])
@@ -205,6 +263,10 @@ function amelia_move(board, y, x) {
 
     for (let i = y - 1; i >= 0; i--) {
         if (board[i][x] != 0) {
+            if (color ^ board[i][x]) {
+                moves.push([i, x])
+                break
+            }
             break
         }
         moves.push([i, x])
@@ -215,6 +277,10 @@ function amelia_move(board, y, x) {
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
+            if (color ^ board[i][j] > 0) {
+                moves.push([i, j])
+                break
+            }
             break
         }
 
@@ -228,6 +294,10 @@ function amelia_move(board, y, x) {
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
+            if (color ^ board[i][j] > 0) {
+                moves.push([i, j])
+                break
+            }
             break
         }
 
@@ -241,6 +311,10 @@ function amelia_move(board, y, x) {
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
+            if (color ^ board[i][j] > 0) {
+                moves.push([i, j])
+                break
+            }
             break
         }
 
@@ -254,6 +328,10 @@ function amelia_move(board, y, x) {
 
     while (!(i < 0 || j < 0 || i >= board.length || j >= board[i].length)) {
         if (board[i][j] != 0) {
+            if (color ^ board[i][j] > 0) {
+                moves.push([i, j])
+                break
+            }
             break
         }
 
@@ -261,6 +339,5 @@ function amelia_move(board, y, x) {
         i += 1
         j -= 1
     }
-
     return moves
 }
