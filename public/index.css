@@ -45,3 +45,8 @@ body{
     grid-template-columns:repeat(8,1fr);
     grid-template-rows:repeat(8,1fr);
 }
+
+.piece {
+    color: black;
+    text-align:center;
+}
