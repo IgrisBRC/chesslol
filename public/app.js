@@ -1,16 +1,16 @@
 let board = [
-    [0, 0, 0, 0, 0, 0, 0, 0],
+    [-3, -5, -4, -2, -1, -4, -5, -3],
     [-6, -6, -6, -6, -6, -6, -6, -6],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [6, 6, 6, 6, 6, 6, 6, 6],
-    [0, 0, 0, 0, 0, 0, 0, 0],
+    [3, 5, 4, 2, 1, 4, 5, 3],
 ]
 
 
-console.log(move(board, 1, 0))
+//console.log(move(board, 1, 0))
 //move(board, 3, 3)
 
 function move(board, y, x) {
@@ -363,4 +363,3 @@ function amelia_move(board, y, x) {
     return moves
 }
 
-export { move }
