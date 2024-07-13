@@ -9,36 +9,26 @@ let board = [
     [0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
-//console.log(move(board, 1, 0))
+
+console.log(move(board, 1, 0))
 //move(board, 3, 3)
 
 function move(board, y, x) {
-    switch (board[y][x]) {
+    let piece = Math.abs(board[y][x])
+    switch (piece) {
         case 0:
             return []
         case 1:
             return king_move(board, y, x)
-        case -1:
-            return king_move(board, y, x)
         case 2:
-            return amelia_move(board, y, x)
-        case -2:
             return amelia_move(board, y, x)
         case 3:
             return rook_move(board, y, x)
-        case -3:
-            return rook_move(board, y, x)
         case 4:
-            return bishop_move(board, y, x)
-        case -4:
             return bishop_move(board, y, x)
         case 5:
             return knight_move(board, y, x)
-        case -5:
-            return knight_move(board, y, x)
         case 6:
-            return pawn_move(board, y, x)
-        case -6:
             return pawn_move(board, y, x)
     }
 }
@@ -373,4 +363,4 @@ function amelia_move(board, y, x) {
     return moves
 }
 
-export {move}
+export { move }
