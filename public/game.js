@@ -75,7 +75,7 @@ for (let i = 0; i < 8; i++) {
 
 let squares = document.getElementsByClassName('box')
 
-let prev = ["dummy"]
+let previously_highlighted_squares = ["dummy"]
 
 for (let i = 0; i < squares.length; i++) {
 
@@ -89,15 +89,15 @@ for (let i = 0; i < squares.length; i++) {
 
         let moves = move(board, square[0], square[1])
 
-        for (let i = 0; i < prev.length; i++) {
-            document.getElementById(prev[i]).classList.remove('highlight')
+        for (let i = 0; i < previously_highlighted_squares.length; i++) {
+            document.getElementById(previously_highlighted_squares[i]).classList.remove('highlight')
         }
 
 
         for (let i = 0; i < moves.length; i++) {
 
             document.getElementById(`${alphabet[moves[i][1]]}${8 - moves[i][0]}`).classList.add('highlight')
-            prev.push(`${alphabet[moves[i][1]]}${8 - moves[i][0]}`)
+            previously_highlighted_squares.push(`${alphabet[moves[i][1]]}${8 - moves[i][0]}`)
         }
 
     })
