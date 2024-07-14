@@ -41,6 +41,9 @@ function pawn_move(board, y, x) {
             if (board[y - 1][x] == 0) {
                 moves.push([y - 1, x])
             }
+            else {
+                return moves
+            }
             if (board[y - 2][x] == 0) {
                 moves.push([y - 2, x])
             }
@@ -53,6 +56,9 @@ function pawn_move(board, y, x) {
         if (y == 1) {
             if (board[y + 1][x] == 0) {
                 moves.push([y + 1, x])
+            }
+            else {
+                return moves
             }
             if (board[y + 2][x] == 0) {
                 moves.push([y + 2, x])
