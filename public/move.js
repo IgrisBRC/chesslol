@@ -9,10 +9,16 @@ let board = [
     [3, 5, 4, 2, 1, 4, 5, 3],
 ]
 
+let to_move = true
+
 //console.log(move(board, 4, 3))
 //move(board, 3, 3)
 
-function move(board, y, x) {
+function move(board, y, x, to_move) {
+    if (to_move ^ board[y][x] > 0) {
+        return []
+    }
+
     let piece = Math.abs(board[y][x])
     switch (piece) {
         case 0:

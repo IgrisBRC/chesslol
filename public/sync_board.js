@@ -9,62 +9,62 @@ function sync_board() {
 
             switch (board[i][j]) {
                 case 1:
-                    piece.classList.add('wk')
+                    piece.classList.add('w')
                     square.append(piece)
                     piece.append('K')
                     break
                 case -1:
-                    piece.classList.add('bk')
+                    piece.classList.add('b')
                     square.append(piece)
                     piece.append('K')
                     break
                 case 2:
-                    piece.classList.add('wq')
+                    piece.classList.add('w')
                     square.append(piece)
                     piece.append('Q')
                     break
                 case -2:
-                    piece.classList.add('bq')
+                    piece.classList.add('b')
                     square.append(piece)
                     piece.append('Q')
                     break
                 case 3:
-                    piece.classList.add('wr')
+                    piece.classList.add('w')
                     square.append(piece)
                     piece.append('R')
                     break
                 case -3:
-                    piece.classList.add('br')
+                    piece.classList.add('b')
                     square.append(piece)
                     piece.append('R')
                     break
                 case 4:
-                    piece.classList.add('wb')
+                    piece.classList.add('w')
                     square.append(piece)
                     piece.append('B')
                     break
                 case -4:
-                    piece.classList.add('bb')
+                    piece.classList.add('b')
                     square.append(piece)
                     piece.append('B')
                     break
                 case 5:
-                    piece.classList.add('wn')
+                    piece.classList.add('w')
                     square.append(piece)
                     piece.append('N')
                     break
                 case -5:
-                    piece.classList.add('bn')
+                    piece.classList.add('b')
                     square.append(piece)
                     piece.append('N')
                     break
                 case 6:
-                    piece.classList.add('wp')
+                    piece.classList.add('w')
                     square.append(piece)
                     piece.append('p')
                     break
                 case -6:
-                    piece.classList.add('bp')
+                    piece.classList.add('b')
                     square.append(piece)
                     piece.append('p')
                     break

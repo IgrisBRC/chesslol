@@ -15,7 +15,7 @@ for (let i = 0; i < squares.length; i++) {
         square.push(id.charAt(0).charCodeAt(0) - 97)
 
 
-        let moves = move(board, square[0], square[1])
+        let moves = move(board, square[0], square[1], to_move)
 
 
         for (let i = 0; i < previously_highlighted_squares.length; i++) {
