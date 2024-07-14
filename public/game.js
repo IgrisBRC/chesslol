@@ -3,7 +3,7 @@ const alphabet = 'abcdefgh'
 
 for (let i = 0; i < 8; i++) {
     for (let j = 0; j < 8; j++) {
-        let square = document.getElementById(`${alphabet.charAt(j)}${i + 1}`)
+        let square = document.getElementById(`${alphabet.charAt(j)}${8 - i}`)
         let piece = document.createElement('p')
 
         piece.classList.add('piece')
@@ -73,9 +73,9 @@ for (let i = 0; i < 8; i++) {
     }
 }
 
-let squares = document.getElementsByClassName('box')
+let squares = document.getElementsByClassName('square')
 
-let previously_highlighted_squares = ["dummy"]
+let previously_highlighted_squares = ['dummy']
 
 for (let i = 0; i < squares.length; i++) {
 
@@ -87,15 +87,17 @@ for (let i = 0; i < squares.length; i++) {
         square.push(8 - id.charAt(1))
         square.push(id.charAt(0).charCodeAt(0) - 97)
 
+
         let moves = move(board, square[0], square[1])
 
         for (let i = 0; i < previously_highlighted_squares.length; i++) {
+            //document.getElementById(previously_highlighted_squares[i]).style.backgroundColor = 'transparent'
             document.getElementById(previously_highlighted_squares[i]).classList.remove('highlight')
         }
 
-
         for (let i = 0; i < moves.length; i++) {
 
+            //document.getElementById(`${alphabet[moves[i][1]]}${8 - moves[i][0]}`).style.backgroundColor = 'yellow'
             document.getElementById(`${alphabet[moves[i][1]]}${8 - moves[i][0]}`).classList.add('highlight')
             previously_highlighted_squares.push(`${alphabet[moves[i][1]]}${8 - moves[i][0]}`)
         }

@@ -1,16 +1,15 @@
 let board = [
     [-3, -5, -4, -2, -1, -4, -5, -3],
     [-6, -6, -6, -6, -6, -6, -6, -6],
+    [0, 0, -5, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 2, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [6, 6, 6, 6, 6, 6, 6, 6],
     [3, 5, 4, 2, 1, 4, 5, 3],
 ]
 
-
-//console.log(move(board, 1, 0))
+//console.log(move(board, 4, 3))
 //move(board, 3, 3)
 
 function move(board, y, x) {
@@ -45,10 +44,8 @@ function pawn_move(board, y, x) {
             if (board[y - 2][x] == 0) {
                 moves.push([y - 2, x])
             }
-        } else if (color && y != 0) {
-            if (board[y - 1][x] == 0) {
-                moves.push([y - 1, x])
-            }
+        } else if (color && y != 0 && board[y - 1][x] == 0) {
+            moves.push([y - 1, x])
         }
 
         return moves
@@ -60,10 +57,8 @@ function pawn_move(board, y, x) {
             if (board[y + 2][x] == 0) {
                 moves.push([y + 2, x])
             }
-        } else if (color && y != 7) {
-            if (board[y + 1][x] == 0) {
-                moves.push([y + 1, x])
-            }
+        } else if (color && y != 7 && board[y + 1][x] == 0) {
+            moves.push([y + 1, x])
         }
         return moves
     }
