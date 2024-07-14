@@ -14,5 +14,4 @@ function sync_board() {
             piece.append(table[Math.abs(board[i][j])])
         }
     }
-    console.log(board)
 }
