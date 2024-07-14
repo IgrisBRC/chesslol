@@ -1,75 +1,16 @@
+function sync_board(){
+    let table = {1:'K', 2:'Q', 3:'R', 4:'B', 5:'N', 6:'p'}
 
-function sync_board() {
-    for (let i = 0; i < 8; i++) {
-        for (let j = 0; j < 8; j++) {
+    for(let i = 0; i < 8; i++){
+        for(let j = 0; j < 8; j++){
+            if(board[i][j] == 0) continue
+
             let square = document.getElementById(`${alphabet.charAt(j)}${8 - i}`)
             let piece = document.createElement('p')
 
-            piece.classList.add('piece')
-
-            switch (board[i][j]) {
-                case 1:
-                    piece.classList.add('w')
-                    square.append(piece)
-                    piece.append('K')
-                    break
-                case -1:
-                    piece.classList.add('b')
-                    square.append(piece)
-                    piece.append('K')
-                    break
-                case 2:
-                    piece.classList.add('w')
-                    square.append(piece)
-                    piece.append('Q')
-                    break
-                case -2:
-                    piece.classList.add('b')
-                    square.append(piece)
-                    piece.append('Q')
-                    break
-                case 3:
-                    piece.classList.add('w')
-                    square.append(piece)
-                    piece.append('R')
-                    break
-                case -3:
-                    piece.classList.add('b')
-                    square.append(piece)
-                    piece.append('R')
-                    break
-                case 4:
-                    piece.classList.add('w')
-                    square.append(piece)
-                    piece.append('B')
-                    break
-                case -4:
-                    piece.classList.add('b')
-                    square.append(piece)
-                    piece.append('B')
-                    break
-                case 5:
-                    piece.classList.add('w')
-                    square.append(piece)
-                    piece.append('N')
-                    break
-                case -5:
-                    piece.classList.add('b')
-                    square.append(piece)
-                    piece.append('N')
-                    break
-                case 6:
-                    piece.classList.add('w')
-                    square.append(piece)
-                    piece.append('p')
-                    break
-                case -6:
-                    piece.classList.add('b')
-                    square.append(piece)
-                    piece.append('p')
-                    break
-            }
+            piece.classList.add(board[i][j] > 0 ? 'w' : 'b')
+            square.append(piece)
+            piece.append(table[Math.abs(board[i][j])])
         }
     }
-
 }
