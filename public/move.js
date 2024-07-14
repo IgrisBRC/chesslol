@@ -9,7 +9,7 @@ let board = [
     [3, 5, 4, 2, 1, 4, 5, 3],
 ]
 
-let to_move = true
+let to_move = true //white to move
 
 //console.log(move(board, 4, 3))
 //move(board, 3, 3)
