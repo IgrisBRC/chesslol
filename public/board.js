@@ -13,17 +13,11 @@ for (let i = 0; i < squares.length; i++) {
 function handle_highlight(id) {
     return function() {
 
-
         let moves = move(board, id.charCodeAt(0) - 48, id.charCodeAt(1) - 48, to_move)
 
-        for (let i = 0; i < previously_highlighted_squares.length; i++) {
-            //if (previously_highlighted_squares[i] == piece_square) {
-            //    continue
-            //}
-
-            let prev = document.getElementById(previously_highlighted_squares[i])
-            prev.classList.remove('highlight')
-            prev.onclick = null
+        for (let i = 0; i < squares.length; i++) {
+            squares[i].classList.remove('highlight')
+            squares[i].onclick = handle_highlight(squares[i].id)
         }
 
         for (let i = 0; i < moves.length; i++) {
@@ -39,9 +33,9 @@ function handle_highlight(id) {
 
 function handle_move(from_id, to_id) {
     return function() {
+
         let table = { 1: 'K', 2: 'Q', 3: 'R', 4: 'B', 5: 'N', 6: 'p' }
 
-        console.log(from_id.charCodeAt(0) - 48, from_id.charCodeAt(1) - 48, to_id.charCodeAt(0) - 48, to_id.charCodeAt(1) - 48)
         make_move(board, from_id.charCodeAt(0) - 48, from_id.charCodeAt(1) - 48, to_id.charCodeAt(0) - 48, to_id.charCodeAt(1) - 48)
 
         let from_element = document.getElementById(from_id)
@@ -58,7 +52,7 @@ function handle_move(from_id, to_id) {
         for (let i = 0; i < previously_highlighted_squares.length; i++) {
             let prev = document.getElementById(previously_highlighted_squares[i])
             prev.classList.remove('highlight')
-            prev.onclick = null
+            prev.onclick = handle_highlight
         }
 
         let piece = document.createElement('p')

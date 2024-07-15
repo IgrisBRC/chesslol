@@ -12,7 +12,7 @@ let board = [
 let to_move = true //white to move
 
 //console.log(board[7][1])
-//console.log(move(board, 7, 1, to_move))
+//console.log(move(board, 3, 1, to_move))
 
 function move(board, y, x, to_move) {
     if (to_move ^ board[y][x] > 0) {
@@ -69,9 +69,10 @@ function pawn_move(board, y, x) {
             if (board[y + 2][x] == 0) {
                 moves.push([y + 2, x])
             }
-        } else if (color && y != 7 && board[y + 1][x] == 0) {
+        } else if (!color && y != 7 && board[y + 1][x] == 0) {
             moves.push([y + 1, x])
         }
+
         return moves
     }
 }
