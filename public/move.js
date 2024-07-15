@@ -11,8 +11,8 @@ let board = [
 
 let to_move = true //white to move
 
-//console.log(move(board, 4, 3))
-//move(board, 3, 3)
+//console.log(board[7][1])
+//console.log(move(board, 7, 1, to_move))
 
 function move(board, y, x, to_move) {
     if (to_move ^ board[y][x] > 0) {
