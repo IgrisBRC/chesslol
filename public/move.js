@@ -10,9 +10,74 @@ let board = [
 ]
 
 let to_move = true //white to move
+let check = false
 
 //console.log(board[7][1])
 //console.log(move(board, 4, 4, to_move))
+
+function check_check(board, to_move, check) {
+    let king_position = []
+
+    if (!to_move) {
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board[i].length; j++) {
+                if (board[i][j] == 1) {
+                    king_position = [i, j]
+                    break
+                }
+            }
+        }
+    } else {
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board[i].length; j++) {
+                if (board[i][j] == -1) {
+                    king_position = [i, j]
+                    break
+                }
+            }
+        }
+    }
+
+    let controlled = controlled_squares(board, !to_move)
+
+    for (let i = 0; i < controlled.length; i++) {
+        if (controlled[i][0] == king_position[0] && controlled[i][1] == king_position[1]) {
+            return true
+        }
+    }
+
+    return false
+}
+
+function controlled_squares(board, to_move) {
+    let squares = []
+
+    if (to_move) {
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board[0].length; j++) {
+                if (board[i][j] < 0) {
+                    let moves = move(board, i, j, !to_move)
+                    for (let i = 0; i < moves.length; i++) {
+                        squares.push(moves[i])
+                    }
+                }
+            }
+        }
+    } else {
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board[i].length; j++) {
+                if (board[i][j] > 0) {
+                    let moves = move(board, i, j, !to_move)
+                    for (let i = 0; i < moves.length; i++) {
+                        squares.push(moves[i])
+                    }
+                }
+            }
+        }
+    }
+
+    return squares
+}
 
 function move(board, y, x, to_move) {
     if (to_move ^ board[y][x] > 0) {
