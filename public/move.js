@@ -211,7 +211,6 @@ function rook_move(board, y, x) {
     for (let i = x + 1; i < board[1].length; i++) {
         if (board[y][i] != 0) {
             if (color ^ board[y][i] > 0) {
-                console.log(color ^ board[y][i])
                 moves.push([y, i])
                 break
             }
@@ -339,7 +338,6 @@ function amelia_move(board, y, x) {
     for (let i = x + 1; i < board[1].length; i++) {
         if (board[y][i] != 0) {
             if (color ^ board[y][i] > 0) {
-                console.log(color ^ board[y][i])
                 moves.push([y, i])
                 break
             }
