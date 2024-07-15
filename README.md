@@ -2,6 +2,6 @@
 
 todo:
 
-1) make move on click after highlighting
-2) rules of chess (mainly check, checkmate and pins)
-3) en_passant pawn move
+1) rules of chess (mainly check, checkmate and pins)
+2) en_passant pawn move
+3) castling move
