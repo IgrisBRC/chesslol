@@ -6,3 +6,4 @@ todo:
 2) en_passant pawn move
 3) castling move
 4) promotion
+5) stalement/draw
