@@ -6,7 +6,7 @@ function sync_board() {
         for (let j = 0; j < 8; j++) {
             if (board[i][j] == 0) continue
 
-            let square = document.getElementById(`${alphabet.charAt(j)}${8 - i}`)
+            let square = document.getElementById(`${i}${j}`)
             let piece = document.createElement('p')
 
             piece.classList.add(board[i][j] > 0 ? 'w' : 'b', 'piece')
