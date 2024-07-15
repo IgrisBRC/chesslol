@@ -12,7 +12,7 @@ let board = [
 let to_move = true //white to move
 
 //console.log(board[7][1])
-//console.log(move(board, 3, 1, to_move))
+//console.log(move(board, 4, 4, to_move))
 
 function move(board, y, x, to_move) {
     if (to_move ^ board[y][x] > 0) {
@@ -57,7 +57,6 @@ function pawn_move(board, y, x) {
             moves.push([y - 1, x])
         }
 
-        return moves
     } else {
         if (y == 1) {
             if (board[y + 1][x] == 0) {
@@ -72,9 +71,25 @@ function pawn_move(board, y, x) {
         } else if (!color && y != 7 && board[y + 1][x] == 0) {
             moves.push([y + 1, x])
         }
-
-        return moves
     }
+
+    if (color) {
+        if (x - 1 >= 0 && board[y - 1][x - 1] < 0 && y - 1 >= 0) {
+            moves.push([y - 1, x - 1])
+        }
+        if (x + 1 <= 7 && board[y - 1][x + 1] < 0 && y - 1 >= 0) {
+            moves.push([y - 1, x + 1])
+        }
+    } else {
+        if (x - 1 >= 0 && board[y + 1][x - 1] > 0 && y + 1 <= 7) {
+            moves.push([y + 1, x - 1])
+        }
+        if (x + 1 <= 7 && board[y + 1][x + 1] > 0 && y + 1 <= 7) {
+            moves.push([y + 1, x + 1])
+        }
+    }
+
+    return moves
 }
 
 function king_move(board, y, x) {
