@@ -20,13 +20,14 @@
 }
 
 .white{
-    background-color: #eaead2;
-    /*background-color: #4b7299; */
+    /*background-color: #eaead2;*/
+    background-color: #EDD6B0;
     color: #4b7299;
 }
 
 .black{    
-    background-color: #4b7299; 
+    /*background-color: #4b7299; */
+    background-color: #B88762;
     color: #eaead2;
 }
 
@@ -37,6 +38,7 @@ body{
     justify-content: center;
     align-items: center;
     margin: 1px;
+    background-color: #2F3646;
 }
 
 .chess-board{
