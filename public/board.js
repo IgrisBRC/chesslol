@@ -4,7 +4,7 @@ let squares = document.getElementsByClassName('square')
 
 sync_board()
 
-let previously_highlighted_squares = ['dummy']
+let highlighted_squares = []
 
 for (let i = 0; i < squares.length; i++) {
     squares[i].onclick = handle_highlight(squares[i].id)
@@ -15,9 +15,9 @@ function handle_highlight(id) {
 
         let moves = move(board, id.charCodeAt(0) - 48, id.charCodeAt(1) - 48, to_move)
 
-        for (let i = 0; i < squares.length; i++) {
-            squares[i].classList.remove('highlight')
-            squares[i].onclick = handle_highlight(squares[i].id)
+        for (let i = 0; i < highlighted_squares.length; i++) {
+            highlighted_squares[i].classList.remove('highlight')
+            highlighted_squares[i].onclick = handle_highlight(highlighted_squares[i].id)
         }
 
         for (let i = 0; i < moves.length; i++) {
@@ -26,14 +26,13 @@ function handle_highlight(id) {
             hlsquare.classList.add('highlight')
             hlsquare.onclick = handle_move(id, hlsquare.id)
 
-            previously_highlighted_squares.push(`${moves[i][0]}${moves[i][1]}`)
+            highlighted_squares.push(hlsquare)
         }
     }
 }
 
 function handle_move(from_id, to_id) {
     return function() {
-
         let table = { 1: 'K', 2: 'Q', 3: 'R', 4: 'B', 5: 'N', 6: 'p' }
 
         make_move(board, from_id.charCodeAt(0) - 48, from_id.charCodeAt(1) - 48, to_id.charCodeAt(0) - 48, to_id.charCodeAt(1) - 48)
@@ -49,22 +48,16 @@ function handle_move(from_id, to_id) {
             to_element.removeChild(to_element.firstChild)
         }
 
-        for (let i = 0; i < previously_highlighted_squares.length; i++) {
-            let prev = document.getElementById(previously_highlighted_squares[i])
-            prev.classList.remove('highlight')
-            prev.onclick = handle_highlight
-        }
-
         let piece = document.createElement('p')
         piece.classList.add(board[to_id.charCodeAt(0) - 48][to_id.charCodeAt(1) - 48] > 0 ? 'w' : 'b', 'piece')
         piece.append(table[Math.abs(board[to_id.charCodeAt(0) - 48][to_id.charCodeAt(1) - 48])])
         to_element.append(piece)
 
-        for (let i = 0; i < squares.length; i++) {
-            squares[i].onclick = handle_highlight(squares[i].id)
+        for (let i = 0; i < highlighted_squares.length; i++) {
+            highlighted_squares[i].onclick = handle_highlight(highlighted_squares[i].id)
+            highlighted_squares[i].classList.remove('highlight')
         }
 
         to_move = !to_move
     }
 }
-
