@@ -15,6 +15,12 @@ let check = false
 //console.log(board[7][1])
 //console.log(move(board, 4, 4, to_move))
 
+
+let castle_white_short = true
+let castle_white_long = true
+let castle_black_short = true
+let castle_black_long = true
+
 function check_check(board, to_move, check) {
     let king_position = []
 
@@ -55,7 +61,7 @@ function controlled_squares(board, to_move) {
     if (to_move) {
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board[0].length; j++) {
-                if (board[i][j] < 0) {
+                if (board[i][j] < -1 && board[i][j] > -6) {
                     let moves = move(board, i, j, !to_move)
                     for (let i = 0; i < moves.length; i++) {
                         squares.push(moves[i])
@@ -66,7 +72,7 @@ function controlled_squares(board, to_move) {
     } else {
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board[i].length; j++) {
-                if (board[i][j] > 0) {
+                if (board[i][j] > 1 && board[i][j] < 6) {
                     let moves = move(board, i, j, !to_move)
                     for (let i = 0; i < moves.length; i++) {
                         squares.push(moves[i])
@@ -161,6 +167,8 @@ function king_move(board, y, x) {
     let color = board[y][x] > 0
     let moves = []
 
+    let controlled = controlled_squares(board, to_move)
+
     for (let i = y - 1; i <= y + 1; i += 1) {
         for (let j = x - 1; j <= x + 1; j += 1) {
             if ((i == y && j == x) || i < 0 || j < 0 || i >= board.length || j >= board[i].length) {
@@ -170,6 +178,46 @@ function king_move(board, y, x) {
                 moves.push([i, j])
             }
         }
+    }
+
+    if (color && castle_white_short && board[7][6] == 0 && board[7][5] == 0) {
+        for (let i = 0; i < controlled.length; i++) {
+            if ((controlled[i][0] == 7 && controlled[i][1] == 6) || (controlled[i][0] == 7 && controlled[i][1] == 5)) {
+                return moves
+            }
+        }
+
+        moves.push([7, 6])
+    }
+
+    if (color && castle_white_long && board[7][2] == 0 && board[7][3] == 0) {
+        for (let i = 0; i < controlled.length; i++) {
+            if ((controlled[i][0] == 7 && controlled[i][1] == 2) || (controlled[i][0] == 7 && controlled[i][1] == 3)) {
+                return moves
+            }
+        }
+
+        moves.push([7, 2])
+    }
+
+    if (!color && castle_black_short && board[0][6] == 0 && board[0][5] == 0) {
+        for (let i = 0; i < controlled.length; i++) {
+            if ((controlled[i][0] == 0 && controlled[i][1] == 6) || (controlled[i][0] == 0 && controlled[i][1] == 5)) {
+                return moves
+            }
+        }
+
+        moves.push([0, 6])
+    }
+
+    if (!color && castle_black_long && board[0][2] == 0 && board[0][3] == 0) {
+        for (let i = 0; i < controlled.length; i++) {
+            if ((controlled[i][0] == 0 && controlled[i][1] == 2) || (controlled[i][0] == 0 && controlled[i][1] == 3)) {
+                return moves
+            }
+        }
+
+        moves.push([0, 2])
     }
 
     return moves
