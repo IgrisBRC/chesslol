@@ -35,7 +35,56 @@ function handle_move(from_id, to_id) {
     return function() {
         let table = { 1: 'K', 2: 'Q', 3: 'R', 4: 'B', 5: 'N', 6: 'p' }
 
-        make_move(board, from_id.charCodeAt(0) - 48, from_id.charCodeAt(1) - 48, to_id.charCodeAt(0) - 48, to_id.charCodeAt(1) - 48)
+        let castle = false
+        let castle_rook_move = []
+
+        let prev_y_x = []
+        let new_y_x = []
+
+        prev_y_x.push([from_id.charCodeAt(0) - 48, from_id.charCodeAt(1) - 48])
+        new_y_x.push([to_id.charCodeAt(0) - 48, to_id.charCodeAt(1) - 48])
+
+        if (board[from_id.charCodeAt(0) - 48][from_id.charCodeAt(1) - 48] == 1 && to_id.charCodeAt(0) - 48 == 7 && to_id.charCodeAt(1) - 48 == 6) {
+            prev_y_x.push([7, 7])
+            new_y_x.push([7, 5])
+
+            castle_rook_move.push([7, 7])
+            castle_rook_move.push([7, 5])
+
+            castle = true
+        }
+
+        else if (board[from_id.charCodeAt(0) - 48][from_id.charCodeAt(1) - 48] == 1 && to_id.charCodeAt(0) - 48 == 7 && to_id.charCodeAt(1) - 48 == 2) {
+            prev_y_x.push([7, 0])
+            new_y_x.push([7, 3])
+
+            castle_rook_move.push([7, 0])
+            castle_rook_move.push([7, 3])
+
+            castle = true
+        }
+
+        else if (board[from_id.charCodeAt(0) - 48][from_id.charCodeAt(1) - 48] == -1 && to_id.charCodeAt(0) - 48 == 0 && to_id.charCodeAt(1) - 48 == 6) {
+            prev_y_x.push([0, 7])
+            new_y_x.push([0, 5])
+
+            castle_rook_move.push([0, 7])
+            castle_rook_move.push([0, 5])
+
+            castle = true
+        }
+
+        else if (board[from_id.charCodeAt(0) - 48][from_id.charCodeAt(1) - 48] == -1 && to_id.charCodeAt(0) - 48 == 0 && to_id.charCodeAt(1) - 48 == 2) {
+            prev_y_x.push([0, 0])
+            new_y_x.push([0, 3])
+
+            castle_rook_move.push([0, 0])
+            castle_rook_move.push([0, 3])
+
+            castle = true
+        }
+
+        make_move(board, prev_y_x, new_y_x)
 
         let from_element = document.getElementById(from_id)
         let to_element = document.getElementById(to_id)
@@ -46,6 +95,52 @@ function handle_move(from_id, to_id) {
 
         while (to_element.firstChild) {
             to_element.removeChild(to_element.firstChild)
+        }
+
+        if (castle) {
+            let color = castle && to_move
+            castle = false
+
+            if (color) {
+
+                let from_element = document.getElementById(`${castle_rook_move[0][0]}${castle_rook_move[0][1]}`)
+                let to_element = document.getElementById(`${castle_rook_move[1][0]}${castle_rook_move[1][1]}`)
+
+                while (from_element.firstChild) {
+                    from_element.removeChild(from_element.firstChild)
+                }
+
+                while (to_element.firstChild) {
+                    to_element.removeChild(to_element.firstChild)
+                }
+
+                let piece = document.createElement('p')
+
+                piece.classList.add(board[castle_rook_move[1][0]][castle_rook_move[1][1]] > 0 ? 'w' : 'b', 'piece')
+                piece.append(table[Math.abs(board[castle_rook_move[1][0]][castle_rook_move[1][1]])])
+                to_element.append(piece)
+
+            } else {
+
+
+                let from_element = document.getElementById(`${castle_rook_move[0][0]}${castle_rook_move[0][1]}`)
+                let to_element = document.getElementById(`${castle_rook_move[1][0]}${castle_rook_move[1][1]}`)
+
+                while (from_element.firstChild) {
+                    from_element.removeChild(from_element.firstChild)
+                }
+
+                while (to_element.firstChild) {
+                    to_element.removeChild(to_element.firstChild)
+                }
+
+                let piece = document.createElement('p')
+
+                piece.classList.add(board[castle_rook_move[1][0]][castle_rook_move[1][1]] > 0 ? 'w' : 'b', 'piece')
+                piece.append(table[Math.abs(board[castle_rook_move[1][0]][castle_rook_move[1][1]])])
+                to_element.append(piece)
+
+            }
         }
 
         let piece = document.createElement('p')
