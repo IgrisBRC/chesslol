@@ -168,7 +168,7 @@ function king_move(board, y, x) {
     let moves = []
 
     let controlled = controlled_squares(board, to_move)
-
+    
     for (let i = y - 1; i <= y + 1; i += 1) {
         for (let j = x - 1; j <= x + 1; j += 1) {
             if ((i == y && j == x) || i < 0 || j < 0 || i >= board.length || j >= board[i].length) {
@@ -179,7 +179,7 @@ function king_move(board, y, x) {
             }
         }
     }
-
+    
     if (color && castle_white_short && board[7][6] == 0 && board[7][5] == 0) {
         for (let i = 0; i < controlled.length; i++) {
             if ((controlled[i][0] == 7 && controlled[i][1] == 6) || (controlled[i][0] == 7 && controlled[i][1] == 5)) {
