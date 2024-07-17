@@ -6,7 +6,8 @@
 .box{
     height: 76px;
     width: 76px;  
-    position: relative; 
+    position: relative;
+    user-select: none;
 }
 .top-corner{
     padding: 1px;
