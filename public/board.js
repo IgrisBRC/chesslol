@@ -32,7 +32,7 @@ function handle_highlight(id) {
 }
 
 function handle_move(from_id, to_id) {
-    function fun() {
+    return function() {
         let table = { 1: 'K', 2: 'Q', 3: 'R', 4: 'B', 5: 'N', 6: 'p' }
 
         let from_y = from_id.charCodeAt(0) - 48
@@ -143,6 +143,4 @@ function handle_move(from_id, to_id) {
 
         to_move = !to_move
     }
-
-    return fun;
 }
