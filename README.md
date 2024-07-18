@@ -5,9 +5,8 @@ todo:
 
 1) rules of chess (mainly check, checkmate and pins)
 2) en_passant pawn move
-3) castling move
-4) promotion
-5) stalement/draw
+3) promotion
+4) stalement/draw
 
 # To run
 
