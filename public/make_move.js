@@ -13,9 +13,6 @@
 function make_move(board, prev_y_x, new_y_x) {
 
     if ((board[prev_y_x[0][0]][prev_y_x[0][1]] == 6 || board[prev_y_x[0][0]][prev_y_x[0][1]] == -6) && board[new_y_x[0][0]][new_y_x[0][1]] == 0 && new_y_x[0][1] != prev_y_x[0][1]) {
-        console.log("passant")
-        console.log(en_passant)
-
         if (board[prev_y_x[0][0]][prev_y_x[0][1]] == 6) {
             board[3][en_passant] = 0
         } else {
@@ -63,7 +60,5 @@ function make_move(board, prev_y_x, new_y_x) {
     if (check) {
         console.log("check")
     }
-
-    console.log(board)
 }
 
