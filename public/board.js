@@ -56,8 +56,7 @@ function handle_move(from_id, to_id) {
         prev_y_x.push([from_y, from_x])
         new_y_x.push([to_y, to_x])
 
-        if(Math.abs(from) == 1 && to == 0){
-            console.log("valid")
+        if (Math.abs(from) == 1 && to == 0) {
             if (castle_white_short && from_color && to_y == 7 && to_x == 6) { //white short
                 prev_y_x.push([7, 7])
                 new_y_x.push([7, 5])
@@ -100,6 +99,24 @@ function handle_move(from_id, to_id) {
         }
 
         make_move(board, prev_y_x, new_y_x)
+
+        if (en_passant_move >= 0) {
+            if (from_color) {
+                let passanted_pawn = document.getElementById(`3${en_passant_move}`)
+
+                while (passanted_pawn.firstChild) {
+                    passanted_pawn.removeChild(passanted_pawn.firstChild)
+                }
+            } else {
+                let passanted_pawn = document.getElementById(`4${en_passant_move}`)
+
+                while (passanted_pawn.firstChild) {
+                    passanted_pawn.removeChild(passanted_pawn.firstChild)
+                }
+            }
+
+            en_passant_move = -1
+        }
 
         let from_element = document.getElementById(from_id)
         let to_element = document.getElementById(to_id)
