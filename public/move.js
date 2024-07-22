@@ -23,8 +23,6 @@ let castle_black_long = true
 let en_passant = -1
 let en_passant_move = -1
 
-let promotion = 0
-
 function check_check(board, to_move) {
     let king_position = []
 
