@@ -48,8 +48,6 @@ function check_check(board, to_move, check) {
 
     let controlled = controlled_squares(board, !to_move)
 
-    console.log(controlled)
-
     for (let i = 0; i < controlled.length; i++) {
         if (controlled[i][0] == king_position[0] && controlled[i][1] == king_position[1]) {
             return true
