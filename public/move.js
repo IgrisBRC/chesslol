@@ -48,6 +48,8 @@ function check_check(board, to_move, check) {
 
     let controlled = controlled_squares(board, !to_move)
 
+    console.log(controlled)
+
     for (let i = 0; i < controlled.length; i++) {
         if (controlled[i][0] == king_position[0] && controlled[i][1] == king_position[1]) {
             return true
@@ -63,6 +65,9 @@ function controlled_squares(board, to_move) {
     if (to_move) {
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board[0].length; j++) {
+
+                // ignoring the pawn moves here because the pawns cannot capture forward so those squares aren't controlled
+                // also ignoring king move, because of unintended recursion
                 if (board[i][j] < -1 && board[i][j] > -6) {
                     let moves = move(board, i, j, !to_move)
                     for (let i = 0; i < moves.length; i++) {
@@ -71,6 +76,33 @@ function controlled_squares(board, to_move) {
                 }
             }
         }
+
+        //counting only the capturable squares for pawns
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                if (board[i][j] == -6 && i + 1 >= 0) {
+                    if (j - 1 >= 0) {
+                        squares.push([i + 1, j - 1])
+                    }
+                    if (j + 1 < 8) {
+                        squares.push([i + 1, j + 1])
+                    }
+                }
+                if (board[i][j] == -1) {
+                    for (let k = i - 1; k <= i + 1; k += 1) {
+                        for (let l = j - 1; l <= j + 1; l += 1) {
+                            if ((k == i && l == j) || k < 0 || l < 0 || k >= board.length || l >= board[j].length) {
+                                continue
+                            }
+                            if (board[k][l] == 0 || (!to_move ^ board[k][l] > 0)) {
+                                squares.push([k, l])
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     } else {
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board[i].length; j++) {
@@ -78,6 +110,31 @@ function controlled_squares(board, to_move) {
                     let moves = move(board, i, j, !to_move)
                     for (let i = 0; i < moves.length; i++) {
                         squares.push(moves[i])
+                    }
+                }
+            }
+        }
+
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                if (board[i][j] == 6 && i - 1 < 8) {
+                    if (j - 1 >= 0) {
+                        squares.push([i - 1, j - 1])
+                    }
+                    if (j + 1 < 8) {
+                        squares.push([i - 1, j + 1])
+                    }
+                }
+                if (board[i][j] == 1) {
+                    for (let k = i - 1; k <= i + 1; k += 1) {
+                        for (let l = j - 1; l <= j + 1; l += 1) {
+                            if ((k == i && l == j) || k < 0 || l < 0 || k >= board.length || l >= board[j].length) {
+                                continue
+                            }
+                            if (board[k][l] == 0 || (!to_move ^ board[k][l] > 0)) {
+                                squares.push([k, l])
+                            }
+                        }
                     }
                 }
             }
