@@ -3,9 +3,8 @@
 
 todo:
 
-1) rules of chess (legal moves and checkmate)
-2) promotion
-3) stalement/draw
+1) webRTC
+2) rules of chess (legal moves, checkmate, stalemate and draw)
 
 # To run
 
