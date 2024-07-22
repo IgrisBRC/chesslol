@@ -23,7 +23,9 @@ let castle_black_long = true
 let en_passant = -1
 let en_passant_move = -1
 
-function check_check(board, to_move, check) {
+let promotion = 0
+
+function check_check(board, to_move) {
     let king_position = []
 
     if (!to_move) {
@@ -571,4 +573,6 @@ function amelia_move(board, y, x) {
     }
     return moves
 }
+
+
 

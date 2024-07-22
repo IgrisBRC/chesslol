@@ -9,6 +9,7 @@
     position: relative;
     user-select: none;
 }
+
 .top-corner{
     padding: 1px;
     position: absolute;
@@ -23,6 +24,7 @@
 .white{
     /*background-color: #eaead2;*/
     background-color: #EDD6B0;
+    /*background-color: #B88762;*/
     color: #4b7299;
 }
 
@@ -67,3 +69,21 @@ body{
 .b {
     color: black;
 }
+
+.piece-option {
+    font-size: 8rem;
+    height: 10rem;
+    width: 10rem;
+    text-align: center;
+}
+
+#promotion-window {
+    position: fixed;
+    height: 10rem;
+    width: 40rem;
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    visibility: hidden;
+}
+

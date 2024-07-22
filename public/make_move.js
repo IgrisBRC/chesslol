@@ -33,7 +33,6 @@ function make_move(board, prev_y_x, new_y_x) {
             en_passant = prev_y_x[i][1]
         }
 
-
         board[new_y_x[i][0]][new_y_x[i][1]] = board[prev_y_x[i][0]][prev_y_x[i][1]]
     }
 
@@ -56,9 +55,98 @@ function make_move(board, prev_y_x, new_y_x) {
         board[prev_y_x[i][0]][prev_y_x[i][1]] = 0
     }
 
+    if (board[new_y_x[0][0]][new_y_x[0][1]] == 6 && new_y_x[0][0] == 0 || board[new_y_x[0][0]][new_y_x[0][1]] == -6 && new_y_x[0][0] == 7) {
+        let color = board[new_y_x[0][0]][new_y_x[0][1]] > 0
+        handle_promotion(color, new_y_x[0][0], new_y_x[0][1])
+    }
+
     check = check_check(board, to_move, check)
     if (check) {
         console.log("check")
     }
 }
 
+function handle_promotion(color, y, x) {
+    let promotion_window = document.getElementById('promotion-window')
+    promotion_window.style.visibility = "visible"
+
+    let queen_option = document.getElementById('queen')
+
+    queen_option.onclick = () => {
+        let promotion_piece = color ? 2 : -2
+        board[y][x] = promotion_piece
+        promotion_window.style.visibility = "hidden"
+
+        let to_element = document.getElementById(`${y}${x}`)
+        while (to_element.firstChild) {
+            to_element.removeChild(to_element.firstChild)
+        }
+
+        let piece = document.createElement('p')
+
+        piece.classList.add(promotion_piece > 0 ? 'w' : 'b', 'piece')
+        piece.append('Q')
+        to_element.append(piece)
+        return
+    }
+
+    let rook_option = document.getElementById('rook')
+
+    rook_option.onclick = () => {
+        let promotion_piece = color ? 3 : -3
+        board[y][x] = promotion_piece
+        promotion_window.style.visibility = "hidden"
+
+        let to_element = document.getElementById(`${y}${x}`)
+        while (to_element.firstChild) {
+            to_element.removeChild(to_element.firstChild)
+        }
+
+        let piece = document.createElement('p')
+
+        piece.classList.add(promotion_piece > 0 ? 'w' : 'b', 'piece')
+        piece.append('R')
+        to_element.append(piece)
+        return
+    }
+
+    let bishop_option = document.getElementById('bishop')
+
+    bishop_option.onclick = () => {
+        let promotion_piece = color ? 4 : -4
+        board[y][x] = promotion_piece
+        promotion_window.style.visibility = "hidden"
+
+        let to_element = document.getElementById(`${y}${x}`)
+        while (to_element.firstChild) {
+            to_element.removeChild(to_element.firstChild)
+        }
+
+        let piece = document.createElement('p')
+
+        piece.classList.add(promotion_piece > 0 ? 'w' : 'b', 'piece')
+        piece.append('B')
+        to_element.append(piece)
+        return
+    }
+
+    let knight_option = document.getElementById('knight')
+
+    knight_option.onclick = () => {
+        let promotion_piece = color ? 5 : -5
+        board[y][x] = promotion_piece
+        promotion_window.style.visibility = "hidden"
+
+        let to_element = document.getElementById(`${y}${x}`)
+        while (to_element.firstChild) {
+            to_element.removeChild(to_element.firstChild)
+        }
+
+        let piece = document.createElement('p')
+
+        piece.classList.add(promotion_piece > 0 ? 'w' : 'b', 'piece')
+        piece.append('N')
+        to_element.append(piece)
+        return
+    }
+}
