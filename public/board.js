@@ -6,8 +6,17 @@ sync_board()
 
 let highlighted_squares = []
 
+//allow ondrop to fire
+document.addEventListener("dragover", (e) => e.preventDefault(), false)
+
+function piece_events(e){
+    e.onclick = e.ondrag = handle_highlight(e.id)
+    e.draggable = true
+    e.ondrop = null
+}
+
 for (let i = 0; i < squares.length; i++) {
-    squares[i].onclick = handle_highlight(squares[i].id)
+    piece_events(squares[i])
 }
 
 function handle_highlight(id) {
@@ -17,13 +26,14 @@ function handle_highlight(id) {
 
         for (let i = 0; i < highlighted_squares.length; i++) {
             highlighted_squares[i].classList.remove('highlight')
-            highlighted_squares[i].onclick = handle_highlight(highlighted_squares[i].id)
+            piece_events(highlighted_squares[i])
         }
 
         for (let i = 0; i < moves.length; i++) {
             let hlsquare = document.getElementById(`${moves[i][0]}${moves[i][1]}`)
 
             hlsquare.classList.add('highlight')
+            hlsquare.ondrop = handle_move(id, hlsquare.id)
             hlsquare.onclick = handle_move(id, hlsquare.id)
 
             highlighted_squares.push(hlsquare)
@@ -105,7 +115,7 @@ function handle_move(from_id, to_id) {
                 let passanted_pawn = document.getElementById(`3${en_passant_move}`)
 
                 while (passanted_pawn.firstChild) {
-                    passanted_pawn.removeChild(passanted_pawn.firstChild)
+                    onclickpassanted_pawn.removeChild(passanted_pawn.firstChild)
                 }
             } else {
                 let passanted_pawn = document.getElementById(`4${en_passant_move}`)
@@ -154,7 +164,8 @@ function handle_move(from_id, to_id) {
         to_element.append(piece)
 
         for (let i = 0; i < highlighted_squares.length; i++) {
-            highlighted_squares[i].onclick = handle_highlight(highlighted_squares[i].id)
+            //highlighted_squares[i].onclick = handle_highlight(highlighted_squares[i].id)
+            piece_events(highlighted_squares[i])
             highlighted_squares[i].classList.remove('highlight')
         }
 
