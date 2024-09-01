@@ -115,7 +115,7 @@ function handle_move(from_id, to_id) {
                 let passanted_pawn = document.getElementById(`3${en_passant_move}`)
 
                 while (passanted_pawn.firstChild) {
-                    onclickpassanted_pawn.removeChild(passanted_pawn.firstChild)
+                    passanted_pawn.removeChild(passanted_pawn.firstChild)
                 }
             } else {
                 let passanted_pawn = document.getElementById(`4${en_passant_move}`)
