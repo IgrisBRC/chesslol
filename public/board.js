@@ -5,12 +5,13 @@ let squares = document.getElementsByClassName('square')
 sync_board()
 
 let highlighted_squares = []
+let drag;
 
 //allow ondrop to fire
 document.addEventListener("dragover", (e) => e.preventDefault(), false)
 
 function piece_events(e){
-    e.onclick = e.ondrag = handle_highlight(e.id)
+    e.onclick = e.ondragstart = handle_highlight(e)
     e.draggable = true
     e.ondrop = null
 }
@@ -19,11 +20,17 @@ for (let i = 0; i < squares.length; i++) {
     piece_events(squares[i])
 }
 
-function handle_highlight(id) {
-    return function() {
+function handle_highlight(elem) {
+    return function(ev) {
 
-        let moves = move(board, id.charCodeAt(0) - 48, id.charCodeAt(1) - 48, to_move)
+        //validates if square has a piece, and it is it's turn
+        if(ev.type === "dragstart" && (!elem || !elem.hasChildNodes() || 
+          !elem.children[0].classList.contains(to_move? "w" : "b"))){
+            return false
+        }
 
+        let moves = move(board, elem.id.charCodeAt(0) - 48, elem.id.charCodeAt(1) - 48, to_move)
+        
         for (let i = 0; i < highlighted_squares.length; i++) {
             highlighted_squares[i].classList.remove('highlight')
             piece_events(highlighted_squares[i])
@@ -33,8 +40,8 @@ function handle_highlight(id) {
             let hlsquare = document.getElementById(`${moves[i][0]}${moves[i][1]}`)
 
             hlsquare.classList.add('highlight')
-            hlsquare.ondrop = handle_move(id, hlsquare.id)
-            hlsquare.onclick = handle_move(id, hlsquare.id)
+            hlsquare.ondrop = handle_move(elem.id, hlsquare.id)
+            hlsquare.onclick = handle_move(elem.id, hlsquare.id)
 
             highlighted_squares.push(hlsquare)
         }
