@@ -255,7 +255,7 @@ function king_move(board, y, x) {
         }
     }
 
-    if (color && castle_white_short && board[7][6] == 0 && board[7][5] == 0) {
+    if (!check && color && castle_white_short && board[7][6] == 0 && board[7][5] == 0) {
         for (let i = 0; i < controlled.length; i++) {
             if ((controlled[i][0] == 7 && controlled[i][1] == 6) || (controlled[i][0] == 7 && controlled[i][1] == 5)) {
                 return moves
@@ -265,7 +265,7 @@ function king_move(board, y, x) {
         moves.push([7, 6])
     }
 
-    if (color && castle_white_long && board[7][2] == 0 && board[7][3] == 0) {
+    if (!check && color && castle_white_long && board[7][2] == 0 && board[7][3] == 0) {
         for (let i = 0; i < controlled.length; i++) {
             if ((controlled[i][0] == 7 && controlled[i][1] == 2) || (controlled[i][0] == 7 && controlled[i][1] == 3)) {
                 return moves
@@ -275,7 +275,7 @@ function king_move(board, y, x) {
         moves.push([7, 2])
     }
 
-    if (!color && castle_black_short && board[0][6] == 0 && board[0][5] == 0) {
+    if (!check && !color && castle_black_short && board[0][6] == 0 && board[0][5] == 0) {
         for (let i = 0; i < controlled.length; i++) {
             if ((controlled[i][0] == 0 && controlled[i][1] == 6) || (controlled[i][0] == 0 && controlled[i][1] == 5)) {
                 return moves
@@ -285,7 +285,7 @@ function king_move(board, y, x) {
         moves.push([0, 6])
     }
 
-    if (!color && castle_black_long && board[0][2] == 0 && board[0][3] == 0) {
+    if (!check && !color && castle_black_long && board[0][2] == 0 && board[0][3] == 0) {
         for (let i = 0; i < controlled.length; i++) {
             if ((controlled[i][0] == 0 && controlled[i][1] == 2) || (controlled[i][0] == 0 && controlled[i][1] == 3)) {
                 return moves
