@@ -23,9 +23,10 @@ function handle_highlight(elem) {
     return function(ev) {
 
         //validates if square has a piece, and it is it's turn
-        if(ev.type === "dragstart" && (!elem || !elem.hasChildNodes() || 
-          !elem.children[0].classList.contains(to_move? "w" : "b"))){
-            return false
+        if(ev.type === "dragstart"){
+            if(!elem || !elem.hasChildNodes() || !elem.children[0].classList.contains(to_move? "w" : "b"))
+                return false
+            ev.dataTransfer.setDragImage(elem.children[0], 0, 0);
         }
 
         let moves = move(board, elem.id.charCodeAt(0) - 48, elem.id.charCodeAt(1) - 48, to_move)
