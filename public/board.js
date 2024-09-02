@@ -6,25 +6,42 @@ sync_board()
 
 let highlighted_squares = []
 
-for (let i = 0; i < squares.length; i++) {
-    squares[i].onclick = handle_highlight(squares[i].id)
+//allow ondrop to fire
+document.addEventListener("dragover", (e) => e.preventDefault(), false)
+
+function piece_events(e){
+    e.onclick = e.ondragstart = handle_highlight(e)
+    e.draggable = true
+    e.ondrop = null
 }
 
-function handle_highlight(id) {
-    return function() {
+for (let i = 0; i < squares.length; i++) {
+    piece_events(squares[i])
+}
 
-        let moves = move(board, id.charCodeAt(0) - 48, id.charCodeAt(1) - 48, to_move)
+function handle_highlight(elem) {
+    return function(ev) {
 
+        //validates if square has a piece, and it is it's turn
+        if(ev.type === "dragstart"){
+            if(!elem || !elem.hasChildNodes() || !elem.children[0].classList.contains(to_move? "w" : "b"))
+                return false
+            ev.dataTransfer.setDragImage(elem.children[0], 0, 0);
+        }
+
+        let moves = move(board, elem.id.charCodeAt(0) - 48, elem.id.charCodeAt(1) - 48, to_move)
+        
         for (let i = 0; i < highlighted_squares.length; i++) {
             highlighted_squares[i].classList.remove('highlight')
-            highlighted_squares[i].onclick = handle_highlight(highlighted_squares[i].id)
+            piece_events(highlighted_squares[i])
         }
 
         for (let i = 0; i < moves.length; i++) {
             let hlsquare = document.getElementById(`${moves[i][0]}${moves[i][1]}`)
 
             hlsquare.classList.add('highlight')
-            hlsquare.onclick = handle_move(id, hlsquare.id)
+            hlsquare.ondrop = handle_move(elem.id, hlsquare.id)
+            hlsquare.onclick = handle_move(elem.id, hlsquare.id)
 
             highlighted_squares.push(hlsquare)
         }
@@ -154,7 +171,8 @@ function handle_move(from_id, to_id) {
         to_element.append(piece)
 
         for (let i = 0; i < highlighted_squares.length; i++) {
-            highlighted_squares[i].onclick = handle_highlight(highlighted_squares[i].id)
+            //highlighted_squares[i].onclick = handle_highlight(highlighted_squares[i].id)
+            piece_events(highlighted_squares[i])
             highlighted_squares[i].classList.remove('highlight')
         }
 
