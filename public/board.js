@@ -8,6 +8,7 @@ let highlighted_squares = []
 
 for (let i = 0; i < squares.length; i++) {
     squares[i].onclick = handle_highlight(squares[i].id)
+    squares[i].ondragstart = handle_highlight_drag(squares[i].id)
 }
 
 function handle_highlight(id) {
@@ -25,6 +26,30 @@ function handle_highlight(id) {
 
             hlsquare.classList.add('highlight')
             hlsquare.onclick = handle_move(id, hlsquare.id)
+
+            highlighted_squares.push(hlsquare)
+        }
+    }
+}
+
+function handle_highlight_drag(id) {
+    return function() {
+
+        let moves = move(board, id.charCodeAt(0) - 48, id.charCodeAt(1) - 48, to_move)
+
+        for (let i = 0; i < highlighted_squares.length; i++) {
+            highlighted_squares[i].classList.remove('highlight')
+            highlighted_squares[i].onclick = handle_highlight(highlighted_squares[i].id)
+            highlighted_squares[i].ondragstart = handle_highlight(highlighted_squares[i].id)
+            highlighted_squares[i].ondrop = null
+        }
+
+        for (let i = 0; i < moves.length; i++) {
+            let hlsquare = document.getElementById(`${moves[i][0]}${moves[i][1]}`)
+
+            hlsquare.classList.add('highlight')
+            hlsquare.ondragover = (event) => {event.preventDefault()}
+            hlsquare.ondrop = handle_move(id, hlsquare.id)
 
             highlighted_squares.push(hlsquare)
         }
@@ -143,12 +168,14 @@ function handle_move(from_id, to_id) {
 
             let piece = document.createElement('p')
 
+            piece.setAttribute('draggable', 'true')
             piece.classList.add(board[castle_rook_move[1][0]][castle_rook_move[1][1]] > 0 ? 'w' : 'b', 'piece')
             piece.append(table[Math.abs(board[castle_rook_move[1][0]][castle_rook_move[1][1]])])
             to_element.append(piece)
         }
 
         let piece = document.createElement('p')
+        piece.setAttribute('draggable', 'true')
         piece.classList.add(board[to_y][to_x] > 0 ? 'w' : 'b', 'piece')
         piece.append(table[Math.abs(board[to_y][to_x])])
         to_element.append(piece)
@@ -156,6 +183,8 @@ function handle_move(from_id, to_id) {
         for (let i = 0; i < highlighted_squares.length; i++) {
             highlighted_squares[i].onclick = handle_highlight(highlighted_squares[i].id)
             highlighted_squares[i].classList.remove('highlight')
+            highlighted_squares[i].ondragstart = handle_highlight(highlighted_squares[i].id)
+            highlighted_squares[i].ondrop = null
         }
 
         to_move = !to_move

@@ -8,6 +8,7 @@ function sync_board() {
 
             let square = document.getElementById(`${i}${j}`)
             let piece = document.createElement('p')
+            piece.setAttribute('draggable','true')
 
             piece.classList.add(board[i][j] > 0 ? 'w' : 'b', 'piece')
             square.append(piece)
