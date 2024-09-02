@@ -5,7 +5,6 @@ let squares = document.getElementsByClassName('square')
 sync_board()
 
 let highlighted_squares = []
-let drag;
 
 //allow ondrop to fire
 document.addEventListener("dragover", (e) => e.preventDefault(), false)
