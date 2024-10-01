@@ -1,5 +1,7 @@
 const alphabet = 'abcdefgh'
 
+let turn = false
+
 let squares = document.getElementsByClassName('square')
 
 sync_board()
@@ -9,7 +11,7 @@ let highlighted_squares = []
 //allow ondrop to fire
 document.addEventListener("dragover", (e) => e.preventDefault(), false)
 
-function piece_events(e){
+function piece_events(e) {
     e.onclick = e.ondragstart = handle_highlight(e)
     e.draggable = true
     e.ondrop = null
@@ -21,16 +23,19 @@ for (let i = 0; i < squares.length; i++) {
 
 function handle_highlight(elem) {
     return function(ev) {
+        if (!turn) {
+            return
+        }
 
         //validates if square has a piece, and it is it's turn
-        if(ev.type === "dragstart"){
-            if(!elem || !elem.hasChildNodes() || !elem.children[0].classList.contains(to_move? "w" : "b"))
+        if (ev.type === "dragstart") {
+            if (!elem || !elem.hasChildNodes() || !elem.children[0].classList.contains(to_move ? "w" : "b"))
                 return false
             ev.dataTransfer.setDragImage(elem.children[0], 0, 0);
         }
 
         let moves = move(board, elem.id.charCodeAt(0) - 48, elem.id.charCodeAt(1) - 48, to_move)
-        
+
         for (let i = 0; i < highlighted_squares.length; i++) {
             highlighted_squares[i].classList.remove('highlight')
             piece_events(highlighted_squares[i])
@@ -179,3 +184,4 @@ function handle_move(from_id, to_id) {
         to_move = !to_move
     }
 }
+
