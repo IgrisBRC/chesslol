@@ -17,7 +17,10 @@ let rtc_data
 
 class P2P {
     dc_hooks() {
-        this.dc.onopen = () => console.log("datachannel is opened")
+        this.dc.onopen = () => {
+            console.log("datachannel is opened")
+            document.getElementById("rtc-window").style.visibility = "hidden"
+        }
         this.dc.onmessage = (e) => {
             console.log("received:", e.data)
             rtc_data = e.data

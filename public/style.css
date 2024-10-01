@@ -87,3 +87,21 @@ body{
     visibility: hidden;
 }
 
+
+#rtc-window {
+    position: fixed;
+    height: 50rem;
+    width: 100rem;
+    background-color: white;
+}
+
+
+textarea{
+    width: 35rem;
+    height: 10rem;
+}
+
+button {
+    height:10rem;
+    width: 10rem;
+}
